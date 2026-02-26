@@ -37,8 +37,8 @@ No build step or installation required. This is a pure front-end project.
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Omkar18U/soulsync-ai.git
-   cd soulsync-ai
+   git clone https://github.com/Omkar18U/AI-powered-emotional-support-assistant.git
+   cd AI-powered-emotional-support-assistant
    ```
 
 2. **Add your API key**
