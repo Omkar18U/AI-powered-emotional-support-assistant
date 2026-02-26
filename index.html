@@ -1,0 +1,134 @@
+<!-- 
+  File: index.html
+  Version: Working Fix
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOULSYNC - Your AI Friend</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-indigo-100 font-sans">
+
+    <div id="app-container" class="flex flex-col h-screen max-w-2xl mx-auto bg-white/70 backdrop-blur-xl shadow-2xl rounded-2xl overflow-hidden border border-white">
+        
+        <header class="bg-gradient-to-r from-purple-700 to-indigo-600 text-white p-4 flex items-center justify-between shadow-lg z-10">
+            <div class="flex items-center space-x-3">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.373 3.373 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                <h1 class="text-2xl font-bold tracking-wider">SOULSYNC</h1>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button id="settings-button" class="bg-white/20 hover:bg-white/30 text-white font-bold p-2 rounded-full transition duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </button>
+                <button id="sos-button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 shadow-md flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                    <span>Help</span>
+                </button>
+            </div>
+        </header>
+        
+        <main id="chat-window" class="flex-1 p-6 overflow-y-auto bg-gray-50/50">
+            <!-- Messages will be dynamically added here by JavaScript -->
+        </main>
+        
+        <div id="typing-indicator" class="px-6 pb-2 hidden">
+             <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full bg-purple-200 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.373 3.373 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                </div>
+                <div class="bg-gray-200 rounded-2xl p-3">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="bg-white/80 backdrop-blur-sm p-4 border-t border-gray-200/80">
+            <div class="flex items-center space-x-3">
+                <input type="text" id="message-input" class="flex-1 bg-gray-100 border border-transparent rounded-full py-3 px-5 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white transition" placeholder="Talk or type...">
+                
+                <button id="mic-button" class="bg-gray-200 hover:bg-gray-300 text-gray-600 rounded-full p-3 transition duration-300">
+                    <svg class="w-6 h-6" id="mic-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8h-1a6 6 0 11-5.93 5.93v2.147z" clip-rule="evenodd"></path></svg>
+                </button>
+
+                <button id="send-button" class="bg-purple-600 hover:bg-purple-700 text-white rounded-full p-3 transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                </button>
+            </div>
+             <p class="text-xs text-center text-gray-500 mt-3 px-4">SOULSYNC is a supportive AI companion, not a medical professional. If you are in crisis, please seek immediate help.</p>
+        </footer>
+    </div>
+    
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-left transform transition-all opacity-0 scale-95">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Settings</h2>
+                <button id="close-settings-button" class="text-gray-400 hover:text-gray-600">&times;</button>
+            </div>
+
+            <div class="mb-6">
+                <label class="font-semibold text-gray-700 mb-2 block">Companion's Voice</label>
+                <div class="flex space-x-4">
+                    <button id="male-voice-btn" class="flex-1 voice-choice-btn">Male</button>
+                    <button id="female-voice-btn" class="flex-1 voice-choice-btn">Female</button>
+                </div>
+            </div>
+
+            <div>
+                <label class="font-semibold text-gray-700 mb-2 block">AI Response</label>
+                <div class="flex items-center justify-between bg-gray-100 p-3 rounded-lg">
+                    <span>Read responses aloud</span>
+                    <label for="read-aloud-toggle" class="flex items-center cursor-pointer">
+                        <div class="relative">
+                            <input type="checkbox" id="read-aloud-toggle" class="sr-only">
+                            <div class="toggle-bg block bg-gray-300 w-14 h-8 rounded-full"></div>
+                            <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="crisis-modal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-lg w-full text-center border-2 border-red-500 transform transition-all opacity-0 scale-95">
+            <!-- Crisis modal content remains the same -->
+             <div class="flex justify-center mb-4">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
+                    <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                </div>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Immediate Help is Available</h2>
+            <p class="text-gray-600 mb-6">It sounds like you're going through a very difficult time. Please reach out to a professional who can support you. You are not alone.</p>
+            <div class="space-y-4 text-left">
+                <a href="tel:9999666555" class="block bg-gray-100 hover:bg-gray-200 p-4 rounded-lg transition">
+                    <p class="font-bold text-gray-800">Vandrevala Foundation</p>
+                    <p class="text-purple-600 font-semibold">Call: 9999666555</p>
+                </a>
+                <a href="tel:9152987821" class="block bg-gray-100 hover:bg-gray-200 p-4 rounded-lg transition">
+                    <p class="font-bold text-gray-800">iCall</p>
+                    <p class="text-purple-600 font-semibold">Call: 9152987821</p>
+                </a>
+                 <a href="tel:9820466726" class="block bg-gray-100 hover:bg-gray-200 p-4 rounded-lg transition">
+                    <p class="font-bold text-gray-800">Aasra</p>
+                    <p class="text-purple-600 font-semibold">Call: 9820466726</p>
+                </a>
+            </div>
+            <button id="close-modal-button" class="mt-8 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-full transition">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

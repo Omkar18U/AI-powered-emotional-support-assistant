@@ -1,0 +1,151 @@
+/* File: style.css
+  Version: 4.0 (Conversation Mode Styles)
+*/
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+#chat-window::-webkit-scrollbar {
+    width: 6px;
+}
+#chat-window::-webkit-scrollbar-track {
+    background: transparent;
+}
+#chat-window::-webkit-scrollbar-thumb {
+    background-color: rgba(128, 90, 213, 0.4);
+    border-radius: 20px;
+    border: 3px solid transparent;
+}
+
+.chat-bubble {
+    max-width: 75%;
+    word-wrap: break-word;
+}
+
+.message-pop-in {
+    animation: popIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.typing-dots span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #a78bfa;
+    animation: typing-bounce 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing-bounce {
+    0%, 70%, 100% {
+        transform: translateY(0);
+    }
+    35% {
+        transform: translateY(-8px);
+    }
+}
+
+#crisis-modal.show .transform,
+#settings-modal.show .transform { /* Apply animation to both modals */
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* --- STYLES FOR CONVERSATION MODE --- */
+
+/* This is the red pulse when the mic is actively listening for speech */
+#mic-button.is-listening {
+    background-color: #f87171; /* red-400 */
+    color: white;
+    animation: pulse 1.5s infinite;
+}
+
+/* This is the purple glow when conversation mode is on, but the AI is speaking */
+#mic-button.is-conversing {
+    background-color: #a78bfa; /* purple-400 */
+    color: white;
+    box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.4);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* This ensures the red pulse animation overrides the purple glow when listening */
+#mic-button.is-conversing.is-listening {
+    background-color: #f87171; /* red-400 */
+    color: white;
+    animation: pulse 1.5s infinite;
+}
+
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(248, 113, 113, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(248, 113, 113, 0);
+    }
+}
+
+/* Styles for the voice selection buttons */
+.voice-choice-btn {
+    padding: 0.75rem;
+    border: 2px solid #e5e7eb; /* gray-200 */
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background-color: #f9fafb; /* gray-50 */
+    text-align: center;
+}
+
+.voice-choice-btn:hover {
+    border-color: #a78bfa; /* purple-400 */
+    background-color: #f5f3ff; /* purple-50 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.voice-choice-btn.selected {
+    border-color: #8b5cf6; /* purple-600 */
+    background-color: #ede9fe; /* purple-100 */
+    color: #5b21b6; /* purple-800 */
+    font-weight: 600;
+}
+
+/* Styles for the toggle switch */
+#close-settings-button {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.toggle-bg {
+    transition: background-color 0.2s ease;
+}
+
+input:checked + .toggle-bg {
+    background-color: #8b5cf6; /* purple-600 */
+}
+
+input:checked + .toggle-bg + .dot {
+    transform: translateX(100%);
+}
